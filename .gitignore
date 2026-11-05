@@ -18,9 +18,4 @@ env/
 Thumbs.db
 EOF
 
-# Специфика менеджера uv
-.uv/
-uv.lock
-EOF
-
 .idea/

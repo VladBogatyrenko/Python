@@ -5,7 +5,7 @@ import sys
 sys.stdout.reconfigure(encoding="utf-8")
 def BillionLinesTask(file_path: str, cities_dict: dict):
     try:
-        with open(file_path, "r",encoding="utf-8") as file:
+        with open(file_path, "r",encoding="utf-8", buffering=1024*1024) as file:
             for line in file:
                 splited_str = line.split(";")
                 city = splited_str[0]
