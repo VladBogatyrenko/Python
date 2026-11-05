@@ -25,7 +25,7 @@ def BillionLinesTask(file_path: str, cities_dict: dict):
 
 
 def PrintCities(cities_dict: dict):
-    for key in cities_dict:
+    for key in sorted(cities_dict):
         print(
             f"{key};{cities_dict[key][0]};{round(cities_dict[key][1] / cities_dict[key][3], 1)};{cities_dict[key][2]}")
 
