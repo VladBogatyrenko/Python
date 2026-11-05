@@ -27,7 +27,7 @@ def PrintCities(cities_dict: dict):
     print(output)
 
 
-file_path = "measurements_10m.txt"
+file_path = sys.argv[1]
 cities_dict = {}
 start_time = time.perf_counter()
 BillionLinesTask(file_path, cities_dict)
