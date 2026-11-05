@@ -2,23 +2,26 @@
 import time
 import sys
 
-
+sys.stdout.reconfigure(encoding="utf-8")
 def BillionLinesTask(file_path: str, cities_dict: dict):
-    with open(file_path, "r") as file:
-        for line in file:
-            splited_str = line.split(";")
-            city = splited_str[0]
-            temperature = splited_str[1]
-            fTemperature = float(temperature)
-            if cities_dict.get(city) == None:
-                cities_dict[city] = [fTemperature, fTemperature, fTemperature, 1]
-            else:
-                if fTemperature < cities_dict[city][0]:
-                    cities_dict[city][0] = fTemperature
-                if fTemperature > cities_dict[city][2]:
-                    cities_dict[city][2] = fTemperature
-                cities_dict[city][1] += fTemperature
-                cities_dict[city][3] += 1
+    try:
+        with open(file_path, "r",encoding="utf-8") as file:
+            for line in file:
+                splited_str = line.split(";")
+                city = splited_str[0]
+                temperature = splited_str[1]
+                fTemperature = float(temperature)
+                if cities_dict.get(city) == None:
+                    cities_dict[city] = [fTemperature, fTemperature, fTemperature, 1]
+                else:
+                    if fTemperature < cities_dict[city][0]:
+                        cities_dict[city][0] = fTemperature
+                    if fTemperature > cities_dict[city][2]:
+                        cities_dict[city][2] = fTemperature
+                    cities_dict[city][1] += fTemperature
+                    cities_dict[city][3] += 1
+    except FileNotFoundError:
+        print(f"Ошибка: Файл {file_path} не найден")
 
 
 def PrintCities(cities_dict: dict):
