@@ -19,7 +19,4 @@ Thumbs.db
 EOF
 
 .idea/
-# Специфика менеджера uv
-.uv/
-uv.lock
-EOF
+

@@ -10,7 +10,7 @@ def BillionLinesTask(file_path: str, cities_dict: dict):
                 temperature = int(temperature.replace(b".", b""))
                 data = get(city)
                 if data is None:
-                    cities_dict[city] = [temperature, temperature, temperature, 1]
+                    cities_dict[city] = [temperature,temperature,temperature,1]
                 else:
                     if temperature < data[0]:
                         data[0] = temperature
