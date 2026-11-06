@@ -1,22 +1,19 @@
-# Кэш Python (компилированные файлы)
+
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Виртуальные окружения (если будете использовать)
+
 venv/
 .venv/
 env/
 
-# Настройки сред разработки (PyCharm, VS Code)
-.idea/
-.vscode/
 
-# Файлы операционной системы
+.idea/
+
 .DS_Store
 Thumbs.db
 EOF
 
-.idea/
 

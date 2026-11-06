@@ -31,7 +31,8 @@ def BillionLinesTask(file_path: str, cities_dict: dict):
 
 try:
     file_path = sys.argv[1]
+    cities_dict = {}
+    BillionLinesTask(file_path, cities_dict)
 except IndexError:
     print(f"Ошибка: Файл не указан")
-cities_dict = {}
-BillionLinesTask(file_path, cities_dict)
+
