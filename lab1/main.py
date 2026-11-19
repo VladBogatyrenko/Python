@@ -1,4 +1,5 @@
 import sys
+from stats import *
 
 sys.stdout.reconfigure(encoding="utf-8")
 def main(file_path: str, cities_dict: dict):
@@ -10,20 +11,15 @@ def main(file_path: str, cities_dict: dict):
                 temperature = int(temperature.replace(b".", b""))
                 data = get(city)
                 if data is None:
-                    cities_dict[city] = [temperature, temperature, temperature, 1]
+                    cities_dict[city] = StationStats(temperature)
                 else:
-                    if temperature < data[0]:
-                        data[0] = temperature
-                    if temperature > data[2]:
-                        data[2] = temperature
-                    data[1] += temperature
-                    data[3] += 1
+                    data.update(temperature)
         cities_dict = {
             city.decode("utf-8"): data
             for city, data in cities_dict.items()
         }
         output = '\n'.join(
-            f"{key};{cities_dict[key][0] / 10};{round(cities_dict[key][1] / cities_dict[key][3] / 10, 1)};{cities_dict[key][2] / 10}"
+            f"{key};{cities_dict[key]}"
             for key in sorted(cities_dict))
         print(output)
     except FileNotFoundError:

@@ -11,7 +11,7 @@ class StationStats:
             self.max = value
         self.avarage += value
         self.count += 1
-    def merge(self,other:StationStats):
+    def merge(self,other:"StationStats"):
         if other.min < self.min:
             self.min = other.min
         if other.max > self.max:
@@ -19,4 +19,4 @@ class StationStats:
         self.avarage += other.avarage
         self.count += other.count
     def __repr__(self) -> str:
-        return f"{self.min/10};{self.avarage/self.count/10};{self.max/10}"
+        return f"{self.min/10};{round(self.avarage/self.count/10,1)};{self.max/10}"
