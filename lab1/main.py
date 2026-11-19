@@ -1,9 +1,9 @@
 import sys
 
 sys.stdout.reconfigure(encoding="utf-8")
-def BillionLinesTask(file_path: str, cities_dict: dict):
+def main(file_path: str, cities_dict: dict):
     try:
-        get = cities_dict.get
+        get = cities_dict.get ##TODO: рассказать почему ускоряет
         with open(file_path, "rb", buffering=8 * 1024 * 1024) as file:
             for line in file:
                 city, _, temperature = line.partition(b";")
@@ -29,10 +29,10 @@ def BillionLinesTask(file_path: str, cities_dict: dict):
     except FileNotFoundError:
         print(f"Ошибка: Файл {file_path} не найден")
 
-try:
+if len(sys.argv)>1:
     file_path = sys.argv[1]
     cities_dict = {}
-    BillionLinesTask(file_path, cities_dict)
-except IndexError:
+    main(file_path, cities_dict)
+else:
     print(f"Ошибка: Файл не указан")
 
