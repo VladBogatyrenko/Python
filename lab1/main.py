@@ -5,17 +5,17 @@ from multiprocessing import Pool
 sys.stdout.reconfigure(encoding="utf-8")
 
 
-def processFileChunk(args) -> dict:
+def process_file_chunk(args) -> dict:
     local_dict = {}
-    file_path, startByte, endByte = args
+    file_path, start_byte, end_byte = args
     get = local_dict.get  ##TODO: рассказать почему ускоряет
     with open(file_path, "rb", buffering=8 * 1024 * 1024) as file:
-        if startByte > 0:
-            file.seek(startByte - 1)
+        if start_byte > 0:
+            file.seek(start_byte - 1)
             if file.read(1) != b"\n":
                 file.readline()
         cur_pos = file.tell()
-        while cur_pos < endByte:
+        while cur_pos < end_byte:
             line = file.readline()
             if not line:
                 break
@@ -30,7 +30,7 @@ def processFileChunk(args) -> dict:
     return local_dict
 
 
-def divideFileToChunks(file_path: str, num_chunks: int = 4) -> list:
+def divide_file_fo_chunks(file_path: str, num_chunks: int = 4) -> list:
     file_size = os.path.getsize(file_path)
     chunk_size = file_size // num_chunks
     chunks = [0] * 4
@@ -41,7 +41,7 @@ def divideFileToChunks(file_path: str, num_chunks: int = 4) -> list:
     return chunks
 
 
-def mergeTwoDict(dict1: dict, dict2: dict) -> dict:
+def merge_two_dict(dict1: dict, dict2: dict) -> dict:
     if len(dict1) < len(dict2):
         dict1, dict2 = dict2, dict1
 
@@ -61,10 +61,10 @@ def main(file_path: str):
     except FileNotFoundError:
         print(f"Ошибка: Файл {file_path} не найден")
         return
-    chuncks = divideFileToChunks(file_path)
+    chuncks = divide_file_fo_chunks(file_path)
     with Pool(processes=4) as pool:
-        for temp_dict in pool.imap_unordered(processFileChunk, chuncks):
-            cities_dict = mergeTwoDict(cities_dict, temp_dict)
+        for temp_dict in pool.imap_unordered(process_file_chunk, chuncks):
+            cities_dict = merge_two_dict(cities_dict, temp_dict)
     cities_dict = {
         city.decode("utf-8"): data
         for city, data in cities_dict.items()
