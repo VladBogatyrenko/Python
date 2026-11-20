@@ -30,7 +30,7 @@ def process_file_chunk(args) -> dict:
     return local_dict
 
 
-def divide_file_fo_chunks(file_path: str, num_chunks: int = 4) -> list:
+def divide_file_to_chunks(file_path: str, num_chunks: int = 4) -> list:
     file_size = os.path.getsize(file_path)
     chunk_size = file_size // num_chunks
     chunks = [0] * 4
@@ -53,7 +53,7 @@ def merge_two_dict(dict1: dict, dict2: dict) -> dict:
     return dict1
 
 
-def main(file_path: str):
+def main(file_path: str)->None:
     cities_dict = {}
     try:
         f = open(file_path, 'r')
@@ -61,7 +61,7 @@ def main(file_path: str):
     except FileNotFoundError:
         print(f"Ошибка: Файл {file_path} не найден")
         return
-    chuncks = divide_file_fo_chunks(file_path)
+    chuncks = divide_file_to_chunks(file_path)
     with Pool(processes=4) as pool:
         for temp_dict in pool.imap_unordered(process_file_chunk, chuncks):
             cities_dict = merge_two_dict(cities_dict, temp_dict)
