@@ -4,7 +4,7 @@ class StationStats:
         self.min=value
         self.max=value
         self.avarage=value
-        self.count=value
+        self.count=1
     def update(self,value:int):
         if value < self.min:
             self.min = value

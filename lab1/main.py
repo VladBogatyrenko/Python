@@ -1,9 +1,7 @@
 import os.path
 import sys
-import time
 from stats import *
 from multiprocessing import Pool
-
 sys.stdout.reconfigure(encoding="utf-8")
 
 
@@ -79,11 +77,7 @@ def main(file_path: str):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        start_time = time.perf_counter()
         file_path = sys.argv[1]
         main(file_path)
-        end_time = time.perf_counter()
-        elapsed_time = end_time - start_time
-        print(f"Прошло времени для старой: {elapsed_time:.6f} сек.")
     else:
         print(f"Ошибка: Файл не указан")
