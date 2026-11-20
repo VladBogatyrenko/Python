@@ -1,4 +1,5 @@
 class StationStats:
+    __slots__=("min","max","avarage","count")
     def __init__(self,value:int) -> None:
         self.min=value
         self.max=value
